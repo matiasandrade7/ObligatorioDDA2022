@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import Modelo.Puesto;
 import Modelo.Sector;
 import Modelo.Trabajador;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVistaAtenderLlamadas {
 
@@ -40,6 +40,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
 
         jScrollPane1 = new javax.swing.JScrollPane();
         estadoLlamada = new javax.swing.JTextArea();
+        jOptionPane1 = new javax.swing.JOptionPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         nombreTrabajador = new javax.swing.JLabel();
@@ -268,7 +269,12 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
     }//GEN-LAST:event_btnFinalizarLlamadaActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.dispose();
+        if (controlador.enLlamada()) {
+            mostrarModalSalir();
+        } else {
+            //descincular trabajador
+            this.dispose();
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
 
@@ -287,6 +293,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -354,5 +361,21 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
 
     public void mostrarError(String msg) {
         JOptionPane.showMessageDialog(this, msg);
+    }
+
+    public void mostrarModalSalir() {
+        int dialogButton = JOptionPane.showConfirmDialog(null, "Tiene una llamada en curso, quiere cerrar Atender Llamada?", "Cerrar", JOptionPane.YES_NO_OPTION);
+
+        if (dialogButton == JOptionPane.YES_OPTION) {
+            finalizarLlamada();
+            //Desvincular trabajador del puesto
+            if (!controlador.enLlamada()) {
+                this.dispose();
+            }
+
+        } else {
+            remove(dialogButton);
+        }
+
     }
 }
