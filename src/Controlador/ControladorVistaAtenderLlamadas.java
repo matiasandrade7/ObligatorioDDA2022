@@ -35,6 +35,9 @@ public class ControladorVistaAtenderLlamadas implements Observador {
     public boolean enLlamada() {
         return modelo.getLlamada() != null;
     }
+    public void salirDelPuesto() {
+        modelo.salirDelPuesto();
+    };
     @Override
     public void actualizar(Object evento, Observable origen) {
         Observador.Eventos e  = (Observador.Eventos)evento;

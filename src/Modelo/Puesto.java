@@ -78,7 +78,10 @@ public class Puesto extends Observable {
     public int getCantidadLlamadas() {
         return cantidadLlamadas;
     }
-
+    public void salirDelPuesto() {
+        this.trabajador.setPuesto(null);
+        this.trabajador = null;
+    }
     public void setCantidadLlamadas(int cantidadLlamadas) {
         this.cantidadLlamadas = cantidadLlamadas;
     }
@@ -112,6 +115,7 @@ public class Puesto extends Observable {
     }
 
     public void agregarLlamada(Llamada llamada) {
+        cantidadLlamadas++;
         this.llamada = llamada;
         this.avisar(Observador.Eventos.INICIAR_LLAMADA);
     }

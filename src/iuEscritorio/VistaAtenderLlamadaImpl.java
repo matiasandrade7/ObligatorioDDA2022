@@ -264,6 +264,8 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
     private void btnFinalizarLlamadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarLlamadaActionPerformed
         if (controlador.enLlamada()) {
             finalizarLlamada();
+        } else {
+            controlador.salirDelPuesto();
         }
 
     }//GEN-LAST:event_btnFinalizarLlamadaActionPerformed
@@ -272,7 +274,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
         if (controlador.enLlamada()) {
             mostrarModalSalir();
         } else {
-            //descincular trabajador
+            controlador.salirDelPuesto();
             this.dispose();
         }
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -368,7 +370,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
 
         if (dialogButton == JOptionPane.YES_OPTION) {
             finalizarLlamada();
-            //Desvincular trabajador del puesto
+            controlador.salirDelPuesto();
             if (!controlador.enLlamada()) {
                 this.dispose();
             }
