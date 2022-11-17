@@ -56,8 +56,8 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
         jLabel3 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
-        lSectoresLlamadas = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -89,14 +89,10 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
         jToolBar1.setForeground(new java.awt.Color(0, 0, 0));
         jToolBar1.setRollover(true);
 
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Aplicaciones de monitoreo");
         jToolBar1.add(jLabel1);
 
-        jListSectores.setBackground(new java.awt.Color(255, 255, 255));
-        jListSectores.setBorder(null);
-        jListSectores.setForeground(new java.awt.Color(0, 0, 0));
         jListSectores.setToolTipText("");
         jListSectores.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -106,11 +102,8 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
         jScrollPane1.setViewportView(jListSectores);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Sectores");
 
-        jTable.setBackground(new java.awt.Color(255, 255, 255));
-        jTable.setForeground(new java.awt.Color(0, 0, 0));
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -131,20 +124,19 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
         jTable.setSelectionBackground(new java.awt.Color(0, 0, 0));
         jScrollPane5.setViewportView(jTable);
 
-        lSectoresLlamadas.setForeground(new java.awt.Color(0, 0, 0));
-        lSectoresLlamadas.setText("<Todos los sectores>");
-        lSectoresLlamadas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lSectoresLlamadasMouseClicked(evt);
-            }
-        });
-
         btnSalir.setBackground(new java.awt.Color(255, 255, 255));
         btnSalir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Todos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -161,10 +153,11 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lSectoresLlamadas)
-                                    .addComponent(jLabel3)))
+                                .addGap(256, 256, 256)
+                                .addComponent(jLabel3))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(153, 153, 153)
+                                .addComponent(jButton1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -182,7 +175,7 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lSectoresLlamadas)
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -216,17 +209,17 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
         sectorSeleccionado();
     }//GEN-LAST:event_jListSectoresValueChanged
 
-    private void lSectoresLlamadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lSectoresLlamadasMouseClicked
-        sectoresSeleccionados();
-    }//GEN-LAST:event_lSectoresLlamadasMouseClicked
-
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        sectoresSeleccionados();    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -241,7 +234,6 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
     private javax.swing.JTable jTable;
     private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JLabel lSectoresLlamadas;
     // End of variables declaration//GEN-END:variables
 
     protected void setControlador(ControladorVistaMonitor controlador) {
@@ -290,16 +282,17 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
             for (int i = 0; i < sectorSeleccionado.getLlamadas().size(); i++) {
                 Llamada llamada = sectorSeleccionado.getLlamadas().get(i);
                 if (!llamada.getEstado().equals(Llamada.EstadoLlamada.enEspera)) {
-                    modeloDatos.setValueAt(llamada.getNumeroLlamada(), i, 1);
-                    modeloDatos.setValueAt(llamada.getEstado(), i, 2);
-                    modeloDatos.setValueAt(llamada.getFechaInicio(), i, 3);
-                    modeloDatos.setValueAt(llamada.getFechaFin(), i, 4);
-                    modeloDatos.setValueAt(llamada.getPuesto().getNumero(), i, 5);
-                    modeloDatos.setValueAt(llamada.getTrabajador().getNombreCompleto(), i, 6);
-                    modeloDatos.setValueAt(llamada.calcularDuracionLlamada(), i, 7);
-                    modeloDatos.setValueAt(llamada.calcularCostoLlamada(), i, 8);
-                    modeloDatos.setValueAt(llamada.getCliente().getNombrecompleto(), i, 9);
-                    modeloDatos.setValueAt(llamada.getsaldoCliente(), i, 10);
+                modeloDatos.setValueAt(llamada.getNumeroLlamada(), i, 0);
+                modeloDatos.setValueAt(llamada.getEstado(), i, 1);
+                modeloDatos.setValueAt(llamada.getFechaInicio(), i, 2);
+                modeloDatos.setValueAt(llamada.getFechaFin(), i, 3);
+                modeloDatos.setValueAt(llamada.getPuesto().getNumero(), i, 4);
+                modeloDatos.setValueAt(llamada.getTrabajador().getNombreCompleto(), i, 5);
+                modeloDatos.setValueAt(llamada.calcularDuracionLlamada(), i, 6);
+                modeloDatos.setValueAt(llamada.calcularCostoLlamada(), i, 7);
+                modeloDatos.setValueAt(llamada.getCliente().getNombrecompleto(), i, 8);
+                modeloDatos.setValueAt(llamada.getCliente().getSaldo(), i, 9);
+
                 }
             }
         }
@@ -314,6 +307,7 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
         jTable.setModel(modeloDefault);
         TableModel modeloDatos = jTable.getModel();
         for (int i = 0; i < llamadasSectores.size(); i++) {
+            if (!llamadasSectores.get(i).getEstado().equals(Llamada.EstadoLlamada.enEspera)) {
             Llamada llamada = llamadasSectores.get(i);
             modeloDatos.setValueAt(llamada.getSector().getNombre(), i, 0);
             modeloDatos.setValueAt(llamada.getNumeroLlamada(), i, 1);
@@ -326,7 +320,7 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
             modeloDatos.setValueAt(llamada.calcularCostoLlamada(), i, 8);
             modeloDatos.setValueAt(llamada.getCliente().getNombrecompleto(), i, 9);
             modeloDatos.setValueAt(llamada.getsaldoCliente(), i, 10);
-
+            }
         }
     }
 }

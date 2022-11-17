@@ -34,7 +34,7 @@ public class Llamada extends Observable {
 
     private int numeroLlamada;
 
-    private static int ultimoNumeroLlamada;
+    private static int ultimoNumeroLlamada = 1;
 
     private float costoTotal;
 

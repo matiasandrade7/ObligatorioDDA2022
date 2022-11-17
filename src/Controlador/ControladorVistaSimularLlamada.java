@@ -55,8 +55,8 @@ public class ControladorVistaSimularLlamada implements Observador {
     public void finalizarLlamada() {
         /*
         mirar
-        */
-        if(puesto == null) {
+         */
+        if (puesto == null) {
             System.out.print("");
         }
         String descripcionLlamada = puesto.getLlamada().getDescripcion();
@@ -66,14 +66,17 @@ public class ControladorVistaSimularLlamada implements Observador {
     }
 
     public void finalizarLlamadaEnEspera() {
-        fachada.eliminarLlamadaEnEspera(numeroLlamada);
-        alterarCantidadLlamadas("restar");
+        if (numeroLlamada > 0) {
+            fachada.eliminarLlamadaEnEspera(numeroLlamada);
+            alterarCantidadLlamadas("restar");
+        }
+
     }
 
     public Llamada altaLlamada(String numeroSector) throws LlamadaException {
         Sector unSector = getSector(numeroSector);
         this.setHoraComienzoLlamada((LocalTime.now()));
-        Llamada llamada = fachada.altaLlamada(this.unCliente, unSector, this.fechaInicio, this.horaComienzoLlamada, this.horaInicio);
+        Llamada llamada = fachada.altaLlamada(this.unCliente, unSector, this.fechaInicio,  this.horaInicio, this.horaComienzoLlamada);
         Puesto p = llamada.getPuesto();
         if (p != null) {
             puesto = p;
@@ -82,12 +85,7 @@ public class ControladorVistaSimularLlamada implements Observador {
             this.numeroLlamada = llamada.getNumeroLlamada();
             llamada.agregarObservador(this);
         }
-        /*Sector unSector = getSector(numeroSector);
-        Puesto unPuesto = Fachada.getInstancia().altaLlamada(this.unCliente, unSector, this.fechaInicio, this.horaInicio).get;
-        if (unPuesto != null && llamada != null) {
-            unPuesto.agregarObservador(this);
-            llamada.agregarObservador(this);
-        }*/
+        
         return llamada;
 
     }
