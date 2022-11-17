@@ -53,6 +53,12 @@ public class ControladorVistaSimularLlamada implements Observador {
     }
 
     public void finalizarLlamada() {
+        /*
+        mirar
+        */
+        if(puesto == null) {
+            System.out.print("");
+        }
         String descripcionLlamada = puesto.getLlamada().getDescripcion();
         puesto.finalizarLlamada(descripcionLlamada);
         resetDatos();

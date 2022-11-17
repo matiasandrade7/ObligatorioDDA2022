@@ -58,6 +58,7 @@ public class ControladorVistaMonitor implements Observador {
     }*/
 
     public void updateSectorSeleccionado(Sector sector) {
+        
         vista.mostrarLlamadasSector(sector);
     }
 
