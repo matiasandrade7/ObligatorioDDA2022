@@ -133,6 +133,7 @@ public class ControladorVistaSimularLlamada implements Observador {
         if (e == Eventos.FINALIZAR_LLAMADA) {
             Puesto p = (Puesto) origen;
             p.quitarObservador(this);
+            fachada.finalizarLlamada();
             vista.finalizarLlamada(p.getUltimaDuracionLlamada(), p.getUltimoCosto(), p.getUltimoSaldo());
         } else if (e == Eventos.QUITAR_DE_ESPERA) {
             Llamada llamada = (Llamada) origen;

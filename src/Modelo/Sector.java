@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import Excepciones.LlamadaException;
 import Observer.Observable;
+import Observer.Observador;
 
 public class Sector extends Observable {
 
@@ -21,7 +22,7 @@ public class Sector extends Observable {
     private ArrayList<Trabajador> trabajadores;
 
     private ArrayList<Puesto> puestos;
-
+    
     private ArrayList<Llamada> llamadas;
 
     //private ArrayList<Llamada> llamadasEnEspera;
@@ -51,12 +52,14 @@ public class Sector extends Observable {
         if (puestos.size() > 0) {
             Puesto p = puestoParaAtender();
             if (p != null) {
-                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, horaComienzoLlamada,uncliente, p, p.getTrabajador());
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, horaComienzoLlamada,uncliente, p, p.getTrabajador(),this);
                 p.agregarLlamada(llamada);
+              //  agregarLlamadaSector(llamada);
                 llamadas.add(llamada);
+                this.avisar(Observador.Eventos.ACTUALIZAR_SECTOR);
                 return llamada;
             } else {
-                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, null, uncliente, null, null);
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, null, uncliente, null, null,this);
                 llamadas.add(llamada);
                 return llamada;
             }
@@ -64,7 +67,9 @@ public class Sector extends Observable {
             throw new Excepciones.LlamadaException("Sector no disponible");
         }
     }
-
+    public void agregarLlamadaSector(Llamada llamada){
+        this.llamadas.add(llamada);
+    }
     @Override
     public String toString() {
         return this.nombre;
@@ -86,10 +91,12 @@ public class Sector extends Observable {
     public void asignarLlamadaEnEspera(Puesto p) {
         Llamada llamada = getPrimeraLlamadaEnEspera();
         if(llamada != null) {
+            
             llamada.setPuesto(p);
             llamada.setTrabajador(p.getTrabajador());
             llamada.setTrabajador(p.getTrabajador());
             p.agregarLlamada(llamada);
+            this.avisar(Observador.Eventos.ACTUALIZAR_SECTOR);
             
         }
         
@@ -106,7 +113,9 @@ public class Sector extends Observable {
 
         return puesto;
     }
-
+    public void emitirEventoLlamadaFinalizada() {
+        avisar(Observador.Eventos.ACTUALIZAR_SECTOR);
+    }
     public int cantidadDeLlamadasASerAtendido() {
         int cantLlamadasEnEspera = 0;
 
@@ -150,6 +159,14 @@ public class Sector extends Observable {
         cantMinutos *= puestos.size();
 
         return cantMinutos;
+    }
+
+    public ArrayList<Llamada> getLlamadas() {
+        return llamadas;
+    }
+
+    public void setLlamadas(ArrayList<Llamada> llamadas) {
+        this.llamadas = llamadas;
     }
 
     public boolean bajaPuestoTrabajo(Trabajador unT) {

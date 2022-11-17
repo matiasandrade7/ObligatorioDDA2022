@@ -44,9 +44,11 @@ public class Llamada extends Observable {
 
     private Trabajador trabajador;
 
+    private Sector sector;
+
     private final int costoPorSegundo = 1;
 
-    public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio, LocalTime horaComienzoLlamada, Cliente cliente, Puesto puesto, Trabajador trabajador) {
+    public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio, LocalTime horaComienzoLlamada, Cliente cliente, Puesto puesto, Trabajador trabajador, Sector unSector) {
         this.estado = estado;
         this.fechaInicio = fechaInicio;
         this.horaInicio = horaInicio;
@@ -56,6 +58,15 @@ public class Llamada extends Observable {
         this.cliente = cliente;
         this.puesto = puesto;
         this.trabajador = trabajador;
+        this.sector = unSector;
+    }
+
+    public Sector getSector() {
+        return sector;
+    }
+
+    public void setSector(Sector sector) {
+        this.sector = sector;
     }
 
     public int getDuracion() {
@@ -194,12 +205,14 @@ public class Llamada extends Observable {
         this.descripcion = descripcion;
         this.fechaFin = LocalDate.now();
         this.horaFin = LocalTime.now();
-        this.estado = EstadoLlamada.finalizada;
         this.duracion = calcularDuracionLlamada();
+        
         if (this.estado == EstadoLlamada.enCurso) {
             this.costoTotal = calcularCostoLlamada();
             this.cliente.sumarCosto(this.costoTotal);
         }
+
+        this.estado = EstadoLlamada.finalizada;
 
     }
 
