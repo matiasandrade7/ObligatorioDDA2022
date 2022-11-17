@@ -510,7 +510,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         if (controlador.getHoraComienzoLlamada() != null) {
             controlador.finalizarLlamada();
         }else{
-            controlador.alterarCantidadLlamadas("restar");
+            controlador.finalizarLlamadaEnEspera();
         }
         
         this.dispose();

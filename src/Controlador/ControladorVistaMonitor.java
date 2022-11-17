@@ -5,10 +5,12 @@
 package Controlador;
 
 import Logica.Fachada;
+import Modelo.Llamada;
 import Modelo.Sector;
 import Observer.Observable;
 import Observer.Observador;
 import iuEscritorio.IVistaMonitor;
+import java.util.ArrayList;
 
 /**
  *
@@ -43,12 +45,17 @@ public class ControladorVistaMonitor implements Observador {
     }
 
     public void sectoresSeleccionados() {
-        vista.mostrarLlamadasSectores(modelo.getLlamadasTotal());
+        ArrayList<Llamada> llamadas = new ArrayList<Llamada>();
+        for(Llamada llamada : modelo.getLlamadasTotal())
+            if(!llamada.getEstado().equals(Llamada.EstadoLlamada.enEspera))
+                llamadas.add(llamada);
+        
+        vista.mostrarLlamadasSectores(llamadas);
     }
 
-    public void updateSectores() {
+    /*public void updateSectores() {
          vista.mostrarLlamadasSectores(modelo.getLlamadasTotal());
-    }
+    }*/
 
     public void updateSectorSeleccionado(Sector sector) {
         vista.mostrarLlamadasSector(sector);
@@ -66,7 +73,7 @@ public class ControladorVistaMonitor implements Observador {
     public void actualizar(Object evento, Observable origen) {
         Eventos e = (Eventos)evento;
         if(e.equals(Eventos.ACTUALIZAR_SECTORES) && !isSectorSeleccionado) {
-            updateSectores();
+            sectoresSeleccionados();
         }
         if(e.equals(Eventos.ACTUALIZAR_SECTOR) && isSectorSeleccionado) {
             updateSectorSeleccionado((Sector)origen);

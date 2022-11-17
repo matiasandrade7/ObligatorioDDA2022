@@ -51,6 +51,9 @@ public class Fachada extends Observable {
     public boolean iniciarLlamada() throws LlamadaException {
         return sistemaTrabajadores.iniciarLlamada();
     }
+    public void actualizarMonitor() {
+        avisar(Observador.Eventos.ACTUALIZAR_SECTORES);
+    }
 
     public Llamada altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio, LocalTime horaComienzoLlamada) throws LlamadaException {
         Llamada llamada = sistemaTrabajadores.altaLlamada(uncliente, unSector, fechaInicio, horaInicio,horaComienzoLlamada);
@@ -86,6 +89,9 @@ public class Fachada extends Observable {
 
     public void AgregarSector(Sector s) {
         sistemaTrabajadores.agregarSector(s);
+    }
+    public void eliminarLlamadaEnEspera(int numeroLlamada) {
+        sistemaTrabajadores.eliminarLlamadaEnEspera(numeroLlamada);
     }
 
     public Sector buscarSector(String nombreSector) {

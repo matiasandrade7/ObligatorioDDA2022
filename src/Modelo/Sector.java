@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import Excepciones.LlamadaException;
+import Logica.Fachada;
 import Observer.Observable;
 import Observer.Observador;
 
@@ -57,9 +58,10 @@ public class Sector extends Observable {
               //  agregarLlamadaSector(llamada);
                 llamadas.add(llamada);
                 this.avisar(Observador.Eventos.ACTUALIZAR_SECTOR);
-                return llamada;
+            return llamada;
             } else {
                 Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, null, uncliente, null, null,this);
+                llamada.setHoraComienzoEspera(LocalTime.now());
                 llamadas.add(llamada);
                 return llamada;
             }
@@ -96,12 +98,18 @@ public class Sector extends Observable {
             llamada.setTrabajador(p.getTrabajador());
             llamada.setEstado(Llamada.EstadoLlamada.enCurso);
             p.agregarLlamada(llamada);
-            this.llamadas.add(llamada);
-            this.avisar(Observador.Eventos.ACTUALIZAR_SECTORES);
+            Fachada.getInstancia().finalizarLlamada();
+            this.avisar(Observador.Eventos.ACTUALIZAR_SECTOR);
         }
         
     }
-
+    public Llamada buscarLlamada(int numeroLlamada) {
+        Llamada llamada = (Llamada)llamadas.stream().filter(l -> l.getNumeroLlamada() == numeroLlamada);
+        return llamada;
+    }
+    public void quitarLlamada(Llamada llamada) {
+        llamadas.remove(llamada);
+    }
     public Puesto puestoParaAtender() {
         Puesto puesto = null;
 

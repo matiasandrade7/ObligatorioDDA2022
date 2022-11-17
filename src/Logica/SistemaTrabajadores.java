@@ -27,7 +27,7 @@ public class SistemaTrabajadores {
 
     //ir armando un objeto llamada que se cree desde aca y se le vayan seteando los atributos a medida que avanza simular llamada
     public boolean iniciarLlamada() throws LlamadaException {
-        if (this.getLlamadasTotal().size() < 5) {
+        if (cantidadLlamadas < 5) {
             return true;
         } else {
             throw new LlamadaException("Comuníquese más tarde...");
@@ -117,11 +117,20 @@ public class SistemaTrabajadores {
             sectores.add(s);
         }
     }
-    
-    public void alterarCantidadLlamadas(String operacion){
+
+    public void eliminarLlamadaEnEspera(int numeroLlamada) {
+     for(Sector sector : sectores ) {
+         Llamada llamada = sector.buscarLlamada(numeroLlamada);
+         if(llamada  != null) {
+             sector.quitarLlamada(llamada);
+         }
+     }
+    }
+
+    public void alterarCantidadLlamadas(String operacion) {
         if (operacion.equals("sumar")) {
             cantidadLlamadas++;
-        }else{
+        } else {
             cantidadLlamadas--;
         }
     }
