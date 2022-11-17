@@ -506,6 +506,13 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
     }//GEN-LAST:event_finalizarBtnActionPerformed
 
     private void salirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBtnActionPerformed
+
+        if (controlador.getHoraComienzoLlamada() != null) {
+            controlador.finalizarLlamada();
+        }else{
+            controlador.alterarCantidadLlamadas("restar");
+        }
+        
         this.dispose();
     }//GEN-LAST:event_salirBtnActionPerformed
 
@@ -551,11 +558,6 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
     }
 
     @Override
-    public void reset() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public void altaLlamada(String numeroSectorElegido) {
         LocalDate fecha = controlador.getFechaInicio();
         LocalTime hora = controlador.getHoraInicio();
@@ -575,7 +577,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
                 String msg = "“Aguarde en línea, Ud. se encuentra a ";
                 msg += unSector.cantidadDeLlamadasASerAtendido();
                 msg += " llamadas de ser atendido, la espera estimada es de ";
-                msg += unSector.cantidadDeMinutosDeEspera() + " minutos";
+                msg += Float.toString(unSector.cantidadDeMinutosDeEspera()) + " minutos";
                 jTextAreaMensaje.setText(msg);
             }
         } catch (LlamadaException ex) {
@@ -705,11 +707,6 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         } else {
             controlador.agregarNumeroCi(numero);
         }
-    }
-
-    @Override
-    public void ingresarUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

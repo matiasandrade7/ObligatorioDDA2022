@@ -311,7 +311,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
         nombreSector.setText(s.getNombre());
         numeroPuesto.setText(Integer.toString(p.getNumero()));
         llamadasAtendidas.setText(Integer.toString(p.getCantidadLlamadas()));
-        tiempoPromedio.setText(Integer.toString(p.getTiempoPromedio()));
+        tiempoPromedio.setText(Float.toString(p.getTiempoPromedio()));
         estadoLlamada.setText("Esperando llamada...");
         this.setVisible(true);
     }
@@ -345,7 +345,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
     public void finalizarLlamada(Puesto p) {
         nombreCliente.setText(" ");
         estadoLlamada.setText("Esperando llamada...");
-        tiempoPromedio.setText(Integer.toString(p.getTiempoPromedio()));
+        tiempoPromedio.setText(Float.toString(p.getTiempoPromedio()));
         descripcion.setText(" ");
         btnFinalizarLlamada.setEnabled(false);
 

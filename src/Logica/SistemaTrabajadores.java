@@ -25,9 +25,9 @@ public class SistemaTrabajadores {
         this.trabajadores = new ArrayList<Trabajador>();
     }
 
+    //ir armando un objeto llamada que se cree desde aca y se le vayan seteando los atributos a medida que avanza simular llamada
     public boolean iniciarLlamada() throws LlamadaException {
-        if (cantidadLlamadas < 5) {
-            cantidadLlamadas++;
+        if (this.getLlamadasTotal().size() < 5) {
             return true;
         } else {
             throw new LlamadaException("Comuníquese más tarde...");
@@ -115,6 +115,14 @@ public class SistemaTrabajadores {
     void agregarSector(Sector s) {
         if (s != null) {
             sectores.add(s);
+        }
+    }
+    
+    public void alterarCantidadLlamadas(String operacion){
+        if (operacion.equals("sumar")) {
+            cantidadLlamadas++;
+        }else{
+            cantidadLlamadas--;
         }
     }
 

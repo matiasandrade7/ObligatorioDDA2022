@@ -9,27 +9,26 @@ public class Puesto extends Observable {
 
     private int cantidadLlamadas;
 
-    private int tiempoPromedio;
+    private float tiempoPromedio;
 
     private Trabajador trabajador;
 
     private Sector sector;
 
     private Llamada llamada;
-    
+
     private static int numeroAcumulativo = 1;
 
     private int ultimaDuracionLlamada;
-    
-    private float ultimoCosto;
-    
-    private float ultimoSaldo;
 
+    private float ultimoCosto;
+
+    private float ultimoSaldo;
 
     public float getUltimoSaldo() {
         return ultimoSaldo;
     }
-    
+
     public Puesto(int cantidadLlamadas, int tiempoPromedio, Trabajador trabajador, Sector sector, Llamada llamada) {
         this.numero = numeroAcumulativo;
         numeroAcumulativo++;
@@ -51,9 +50,9 @@ public class Puesto extends Observable {
     public int calcularTiempoPromedio() {
         return 0;
     }
+
     /*tema guardar varias llamadas, calcular tiempo promedio*/
-    
-    
+
     public void finalizarLlamada(String descripcion) {
         this.llamada.finalizarLlamada(descripcion, this);
         ultimaDuracionLlamada = llamada.calcularDuracionLlamada();
@@ -64,9 +63,10 @@ public class Puesto extends Observable {
         this.llamada = null;
         avisar(Observador.Eventos.FINALIZAR_LLAMADA);
         sector.emitirEventoLlamadaFinalizada();
-        
+
         sector.asignarLlamadaEnEspera(this);
     }
+
     public int getNumero() {
         return numero;
     }
@@ -83,11 +83,11 @@ public class Puesto extends Observable {
         this.cantidadLlamadas = cantidadLlamadas;
     }
 
-    public int getTiempoPromedio() {
+    public float getTiempoPromedio() {
         return tiempoPromedio;
     }
 
-    public void setTiempoPromedio(int tiempoPromedio) {
+    public void setTiempoPromedio(float tiempoPromedio) {
         this.tiempoPromedio = tiempoPromedio;
     }
 
@@ -111,10 +111,8 @@ public class Puesto extends Observable {
         return llamada;
     }
 
-    
     public void agregarLlamada(Llamada llamada) {
         this.llamada = llamada;
-        cantidadLlamadas++;
         this.avisar(Observador.Eventos.INICIAR_LLAMADA);
     }
 }

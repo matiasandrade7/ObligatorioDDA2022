@@ -46,6 +46,7 @@ public class ControladorVistaSimularLlamada implements Observador {
         boolean inicio = false;
         if (Fachada.getInstancia().iniciarLlamada()) {
             inicio = true;
+            alterarCantidadLlamadas("sumar");
         }
         return Fachada.getInstancia().iniciarLlamada();
     }
@@ -53,7 +54,8 @@ public class ControladorVistaSimularLlamada implements Observador {
     public void finalizarLlamada() {
         String descripcionLlamada = puesto.getLlamada().getDescripcion();
         puesto.finalizarLlamada(descripcionLlamada);
-        puesto = null;
+        resetDatos();
+
     }
 
     public Llamada altaLlamada(String numeroSector) throws LlamadaException {
@@ -92,17 +94,14 @@ public class ControladorVistaSimularLlamada implements Observador {
         return Fachada.getInstancia().getSectores();
     }
 
-    public void reset() {
-
-    }
-
     public void resetDatos() {
-        fechaInicio = null;
-        horaInicio = null;
-        horaComienzoLlamada = null;
-        vaciarCi();
+        LocalDate fechaInicio = null;
+        LocalTime horaComienzoLlamada = null;
+        LocalTime horaInicio = null;
         estaCiIngresada = false;
         unCliente = null;
+        puesto = null;
+        vaciarCi();
     }
 
     public boolean validaCI() throws CIException {
@@ -131,6 +130,7 @@ public class ControladorVistaSimularLlamada implements Observador {
     public void actualizar(Object evento, Observable origen) {
         Eventos e = (Eventos) evento;
         if (e == Eventos.FINALIZAR_LLAMADA) {
+            alterarCantidadLlamadas("restar");
             Puesto p = (Puesto) origen;
             p.quitarObservador(this);
             fachada.finalizarLlamada();
@@ -189,6 +189,9 @@ public class ControladorVistaSimularLlamada implements Observador {
     public void setHoraComienzoLlamada(LocalTime horaComienzoLlamada) {
         this.horaComienzoLlamada = horaComienzoLlamada;
     }
-    
-    
+
+    public void alterarCantidadLlamadas(String operacion) {
+        Fachada.getInstancia().alterarCantidadLlamadas(operacion);
+    }
+
 }

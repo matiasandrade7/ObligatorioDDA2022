@@ -324,7 +324,7 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
             modeloDatos.setValueAt(llamada.calcularDuracionLlamada(), i, 7);
             modeloDatos.setValueAt(llamada.calcularCostoLlamada(), i, 8);
             modeloDatos.setValueAt(llamada.getCliente().getNombrecompleto(), i, 9);
-            modeloDatos.setValueAt(llamada.getCliente().getSaldo(), i, 10);
+            modeloDatos.setValueAt(llamada.getsaldoCliente(), i, 10);
 
         }
     }

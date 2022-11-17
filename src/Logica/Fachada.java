@@ -21,8 +21,6 @@ public class Fachada extends Observable {
 
     private SistemaTrabajadores sistemaTrabajadores;
 
-    private SistemaLlamadas sistemaLlamadas;
-
     private SistemaClientes sistemaClientes;
 
     public synchronized static Fachada getInstancia() {
@@ -34,7 +32,6 @@ public class Fachada extends Observable {
 
     private Fachada() {
         sistemaClientes = new SistemaClientes();
-        sistemaLlamadas = new SistemaLlamadas();
         sistemaTrabajadores = new SistemaTrabajadores();
     }
 
@@ -93,5 +90,9 @@ public class Fachada extends Observable {
 
     public Sector buscarSector(String nombreSector) {
         return sistemaTrabajadores.buscarSector(nombreSector);
+    }
+
+    public void alterarCantidadLlamadas(String operacion) {
+        sistemaTrabajadores.alterarCantidadLlamadas(operacion);
     }
 }

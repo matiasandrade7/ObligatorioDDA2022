@@ -91,13 +91,13 @@ public class Sector extends Observable {
     public void asignarLlamadaEnEspera(Puesto p) {
         Llamada llamada = getPrimeraLlamadaEnEspera();
         if(llamada != null) {
-            
+            llamada.setHoraComienzoLlamada(LocalTime.now());
             llamada.setPuesto(p);
             llamada.setTrabajador(p.getTrabajador());
-            llamada.setTrabajador(p.getTrabajador());
+            llamada.setEstado(Llamada.EstadoLlamada.enCurso);
             p.agregarLlamada(llamada);
-            this.avisar(Observador.Eventos.ACTUALIZAR_SECTOR);
-            
+            this.llamadas.add(llamada);
+            this.avisar(Observador.Eventos.ACTUALIZAR_SECTORES);
         }
         
     }
@@ -140,8 +140,8 @@ public class Sector extends Observable {
         return llamada;
     }
 
-    public int cantidadDeMinutosDeEspera() {
-        int cantMinutos = 0;
+    public float cantidadDeMinutosDeEspera() {
+        float cantMinutos = 0;
 
         if (cantidadDeLlamadasASerAtendido() > 0) {
             cantMinutos = this.cantidadDeLlamadasASerAtendido() * this.tiempoPromedioAtencionSector();
@@ -150,8 +150,8 @@ public class Sector extends Observable {
         return cantMinutos;
     }
 
-    public int tiempoPromedioAtencionSector() {
-        int cantMinutos = 0;
+    public float tiempoPromedioAtencionSector() {
+        float cantMinutos = 0;
 
         for (Puesto p : puestos) {
             cantMinutos += (p.getTiempoPromedio() / 60);

@@ -18,11 +18,7 @@ public interface IVistaSimularLlamada {
 
     public void altaLlamada(String numeroSectorElegido);
 
-    public void ingresarUsuario();
-
     public void mostrarSectores();
-
-    public void reset();
 
     public void finalizarLlamada(int ultimaDuracionLlamada, float ultimoCosto, float ultimoSaldo);
     
